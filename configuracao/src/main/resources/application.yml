@@ -2,7 +2,7 @@ degub: true
 
 server:
   port: 7070
-  contextPath: /configSystem
+  contextPath: /configuracao
 
 spring:
   jpa:
