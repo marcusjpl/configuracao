@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PropriedadeController {
 
 	@Autowired
-	private PropriedadeService exemploService;
+	private PropriedadeService propriedadeService;
 
-	@RequestMapping(value = "/salvarMensagem", method = RequestMethod.PUT, consumes = {
+	@RequestMapping(value = "/salvarPropriedade", method = RequestMethod.PUT, consumes = {
 			"application/json" }, produces = { "application/json" })
 	public ResponseEntity<Propriedade> save(@RequestBody Propriedade msg) {
 		try {
@@ -29,20 +29,10 @@ public class PropriedadeController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/salvarTeste", method = RequestMethod.POST)
-	public ResponseEntity<Propriedade> save(@RequestBody String msg) {
-		try {
-			exemploService.salvar(msg);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-	}
-
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscarPropriedade", method = RequestMethod.GET)
 	public ResponseEntity<Propriedade> buscar() {
 		try {
-			List<Propriedade> resultado = exemploService.buscar();
+			List<Propriedade> resultado = propriedadeService.buscar();
 			System.out.println(resultado);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -2,7 +2,6 @@ package org.ecad.configuracao.controller;
 
 import java.util.List;
 
-import org.ecad.configuracao.model.Propriedade;
 import org.ecad.configuracao.model.Sistema;
 import org.ecad.configuracao.service.SistemaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class SistemaController {
 	private SistemaService sistemaService;
 
 	@RequestMapping(value = "/salvarSistema", method = RequestMethod.POST)
-	public ResponseEntity<Propriedade> save(@RequestBody String msg) {
+	public ResponseEntity<Sistema> save(@RequestBody String msg) {
 		try {
 			sistemaService.salvar(msg);
 		} catch (Exception e) {
@@ -29,7 +28,7 @@ public class SistemaController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscarSistema", method = RequestMethod.GET)
 	public ResponseEntity<Sistema> buscar() {
 		try {
 			List<Sistema> resultado = sistemaService.buscar();

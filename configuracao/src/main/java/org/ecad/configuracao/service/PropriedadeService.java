@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 public class PropriedadeService {
 
 	@Autowired
-	private PropriedadeRepository exemploRepository;
+	private PropriedadeRepository propriedadeRepository;
 
 	public void salvar(String msg) {
 		Propriedade p = new Propriedade();
 		p.setDescricao("Teste");
-		exemploRepository.save(p);
+		propriedadeRepository.save(p);
 	}
 
 	public List<Propriedade> buscar() {
-		return (List<Propriedade>) exemploRepository.findAll();
+		return (List<Propriedade>) propriedadeRepository.findAll();
 	}
 
 
