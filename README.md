@@ -1,8 +1,9 @@
 # configuracao
 SpringBoot + Rest + H2 + Swagger
 
-# url para swager
+## porta 7070
+## url para swager
 http://localhost:7070/swagger-ui.html
 
-# página inicial
+## página inicial
 http://localhost:7070/configuracao
