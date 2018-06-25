@@ -18,7 +18,7 @@ public class PropriedadeController {
 	@Autowired
 	private PropriedadeService propriedadeService;
 
-	@RequestMapping(value = "/salvarPropriedade", method = RequestMethod.PUT, consumes = {
+	@RequestMapping(value = "/salvar", method = RequestMethod.PUT, consumes = {
 			"application/json" }, produces = { "application/json" })
 	public ResponseEntity<Propriedade> save(@RequestBody Propriedade msg) {
 		try {
@@ -29,7 +29,7 @@ public class PropriedadeController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/buscarPropriedade", method = RequestMethod.GET)
+	@RequestMapping(value = "/propriedades", method = RequestMethod.GET)
 	public ResponseEntity<Propriedade> buscar() {
 		try {
 			List<Propriedade> resultado = propriedadeService.buscar();

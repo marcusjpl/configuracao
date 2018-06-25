@@ -18,7 +18,7 @@ public class SistemaController {
 	@Autowired
 	private SistemaService sistemaService;
 
-	@RequestMapping(value = "/salvarSistema", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public ResponseEntity<Sistema> save(@RequestBody String msg) {
 		try {
 			sistemaService.salvar(msg);
@@ -28,7 +28,7 @@ public class SistemaController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/buscarSistema", method = RequestMethod.GET)
+	@RequestMapping(value = "/sistemas", method = RequestMethod.GET)
 	public ResponseEntity<Sistema> buscar() {
 		try {
 			List<Sistema> resultado = sistemaService.buscar();
