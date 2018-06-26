@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_SISTEMA")
@@ -20,6 +22,10 @@ public class Sistema {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sistema")
 	private List<Propriedade> propriedades;
+	
+	@OneToOne
+	@NotNull
+	private Ambiente ambiente;
 	
 	private String nome, descricao;
 
@@ -45,6 +51,22 @@ public class Sistema {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Propriedade> getPropriedades() {
+		return propriedades;
+	}
+
+	public void setPropriedades(List<Propriedade> propriedades) {
+		this.propriedades = propriedades;
+	}
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
 	}
 
 	@Override
