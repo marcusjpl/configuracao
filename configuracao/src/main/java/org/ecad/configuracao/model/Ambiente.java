@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "TB_AMBIENTE")
 public class Ambiente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@ApiModelProperty(hidden = true)
 	private Long id;
 	
 	@NotNull(message="Nome do Ambiente é obrigatório")

@@ -12,12 +12,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "TB_SISTEMA")
 public class Sistema {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@ApiModelProperty(hidden = true)
 	private Long id;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sistema")

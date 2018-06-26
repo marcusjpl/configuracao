@@ -2,9 +2,9 @@ package org.ecad.configuracao.controller;
 
 import java.util.List;
 
-import org.ecad.configuracao.model.Propriedade;
+import org.ecad.configuracao.model.Ambiente;
 import org.ecad.configuracao.model.Sistema;
-import org.ecad.configuracao.service.PropriedadeService;
+import org.ecad.configuracao.repository.AmbienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/propriedade")
-public class PropriedadeController {
+@RequestMapping("/ambiente")
+public class AmbienteController {
 
 	@Autowired
-	private PropriedadeService propriedadeService;
+	private AmbienteRepository ambienteRepository;
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, 
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST,
 			consumes = {"application/json" }, produces = { "application/json" })
-	public ResponseEntity<Sistema> save(@RequestBody Propriedade p) {
+	public ResponseEntity<Sistema> save(@RequestBody Ambiente ambiente) {
 		try {
-			propriedadeService.salvar(p);
+			ambienteRepository.save(ambiente);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/propriedades", method = RequestMethod.GET)
-	public @ResponseBody List<Propriedade> buscar() {
-		return propriedadeService.buscar();
+	@RequestMapping(value = "/ambientes", method = RequestMethod.GET)
+	public @ResponseBody List<Ambiente> buscar() {
+		return (List<Ambiente>) ambienteRepository.findAll();
 	}
 
 }

@@ -10,18 +10,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/sistema")
 public class SistemaController {
 
 	@Autowired
 	private SistemaService sistemaService;
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public ResponseEntity<Sistema> save(@RequestBody String msg) {
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST, 
+			consumes = {"application/json" }, produces = { "application/json" })
+	public ResponseEntity<Sistema> save(@RequestBody Sistema sistema) {
 		try {
-			sistemaService.salvar(msg);
+			sistemaService.salvar(sistema);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -29,14 +32,8 @@ public class SistemaController {
 	}
 
 	@RequestMapping(value = "/sistemas", method = RequestMethod.GET)
-	public ResponseEntity<Sistema> buscar() {
-		try {
-			List<Sistema> resultado = sistemaService.buscar();
-			System.out.println(resultado);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	public @ResponseBody List<Sistema> buscarTodos() {
+		return sistemaService.buscar();
 	}
 
 }

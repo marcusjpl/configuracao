@@ -23,5 +23,9 @@ public class PropriedadeService {
 		return (List<Propriedade>) propriedadeRepository.findAll();
 	}
 
+	public void salvar(Propriedade p) {
+		propriedadeRepository.save(p);
+	}
+
 
 }

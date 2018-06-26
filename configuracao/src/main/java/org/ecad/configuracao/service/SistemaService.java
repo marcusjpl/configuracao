@@ -17,12 +17,15 @@ public class SistemaService {
 		Sistema s = new Sistema();
 		s.setDescricao("Teste");
 		s.setNome("SGA");
-		sistemaRepository.save(s);
+		
 	}
-
+	
+	public void salvar(Sistema sistema) {
+		sistemaRepository.save(sistema);
+	}
+	
 	public List<Sistema> buscar() {
 		return (List<Sistema>) sistemaRepository.findAll();
 	}
-
-
+	
 }

@@ -12,12 +12,15 @@ import javax.validation.constraints.NotNull;
 
 import org.ecad.configuracao.TipoPropriedade;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "TB_PROPRIEDADE")
 public class Propriedade {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@ApiModelProperty(hidden = true)
 	private Long id;
 
 	@ManyToOne
