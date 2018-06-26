@@ -34,4 +34,9 @@ public class SwaggerConfig {
           new Contact("Marcus", "www.example.com", "myeaddress@company.com"), 
           "License of API", "API license URL", Collections.emptyList());
    }
+    
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//      registry.addRedirectViewController("/rest", "/swagger-ui.html").setKeepQueryParams(true);
+//    }
 }
