@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.ecad.configuracao.TipoPropriedade;
 
@@ -20,11 +21,16 @@ public class Propriedade {
 	private Long id;
 
 	@ManyToOne
+	@NotNull(message="Propriedade deve ser de um Sistema")
 	private Sistema sistema;
 	
-	private String nome, valor, descricao;
+	@NotNull(message="Valor não pode ser nulo")
+	private String nome, valor;
+	
+	private String descricao;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private TipoPropriedade tipoPropriedade;
 	
 	public Propriedade() {

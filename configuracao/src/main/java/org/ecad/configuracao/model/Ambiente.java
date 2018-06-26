@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_AMBIENTE")
@@ -14,7 +15,10 @@ public class Ambiente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String nome, descricao;
+	@NotNull(message="Nome do Ambiente é obrigatório")
+	private String nome;
+	
+	private String descricao;
 
 	public Long getId() {
 		return id;

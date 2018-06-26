@@ -24,10 +24,13 @@ public class Sistema {
 	private List<Propriedade> propriedades;
 	
 	@OneToOne
-	@NotNull
+	@NotNull(message="Sistema deve possuir ao menos um Ambiente")
 	private Ambiente ambiente;
 	
-	private String nome, descricao;
+	@NotNull(message="Campo nome é obrigatório")
+	private String nome;
+	
+	private String descricao;
 
 	public Long getId() {
 		return id;
