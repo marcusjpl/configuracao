@@ -9,8 +9,9 @@ app.config(function($routeProvider) {
         templateUrl : "view/sistema.html",
         controller: "sistemaController"
     })
-    .when("/teste", {
-        template : "<h1>testeeeEEEEE 222222222</h1>"
+    .when("/ambiente", {
+        templateUrl : "view/ambiente.html",
+        controller: "ambienteController"
     })
     .otherwise({
         template : "<h1>Pagina inicial</h1><p></p>"

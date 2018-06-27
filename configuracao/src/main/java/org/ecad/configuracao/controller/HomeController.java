@@ -23,6 +23,11 @@ public class HomeController {
 		return "view/sistema.html";
 	}
 	
+	@RequestMapping("/view/ambiente.html")
+	public String ambiente(Map<String, Object> model) {
+		return "view/ambiente.html";
+	}
+	
 	@RequestMapping("configuracao/welcome")
 	public String inicio(Map<String, Object> model) {
 		return "configuracao/welcome.html";
