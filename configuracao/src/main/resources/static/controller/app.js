@@ -6,15 +6,14 @@ app.config(function($routeProvider) {
         templateUrl : "configuracao.html"
     })
     .when("/sistema", {
-        templateUrl : "templates/view/sistema.html",
+        templateUrl : "view/sistema.html",
         controller: "sistemaController"
     })
     .when("/teste", {
-        templateUrl : "welcome.html",
-        controller: "sistemaController"
+        template : "<h1>testeeeEEEEE 222222222</h1>"
     })
     .otherwise({
-        template : "<h1>None</h1><p>Nothing has been selected</p>"
+        template : "<h1>Pagina inicial</h1><p></p>"
     });
     
 });
