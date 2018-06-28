@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute"]);
+var app = angular.module("app", ['ngRoute', 'angular-growl']);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -18,3 +18,8 @@ app.config(function($routeProvider) {
     });
     
 });
+
+app.config(['growlProvider', function (growlProvider) {
+	growlProvider.globalTimeToLive(3000);
+}]);
+
