@@ -23,13 +23,14 @@ public class AmbienteController {
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST,
 			consumes = {"application/json" }, produces = { "application/json" })
-	public ResponseEntity<Sistema> save(@RequestBody Ambiente ambiente) {
+	public ResponseEntity<Ambiente> save(@RequestBody Ambiente ambiente) {
+		Ambiente retorno = null;
 		try {
-			ambienteRepository.save(ambiente);
+			retorno = ambienteRepository.save(ambiente);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Ambiente>(retorno, HttpStatus.ACCEPTED);
 	}
 
 	@RequestMapping(value = "/ambientes", method = RequestMethod.GET)

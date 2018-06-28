@@ -1,5 +1,7 @@
 var app = angular.module("app", ['ngRoute', 'angular-growl']);
 
+app.constant('URL', 'http://localhost:7070');
+
 app.config(function($routeProvider) {
     $routeProvider
     .when("/configuracao", {

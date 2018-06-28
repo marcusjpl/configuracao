@@ -17,23 +17,27 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name = "TB_SISTEMA")
 public class Sistema {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(hidden = true)
 	private Long id;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sistema")
 	private List<Propriedade> propriedades;
-	
+
 	@OneToOne
-	@NotNull(message="Sistema deve possuir ao menos um Ambiente")
+	@NotNull(message = "Sistema deve possuir ao menos um Ambiente")
 	private Ambiente ambiente;
-	
-	@NotNull(message="Campo nome é obrigatório")
+
+	@NotNull(message = "Campo nome é obrigatório")
 	private String nome;
-	
+
 	private String descricao;
+
+	public Sistema() {
+
+	}
 
 	public Long getId() {
 		return id;
@@ -79,5 +83,5 @@ public class Sistema {
 	public String toString() {
 		return "Sistema [nome=" + nome + ", descricao=" + descricao + "]";
 	}
-	
+
 }

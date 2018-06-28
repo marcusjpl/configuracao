@@ -37,7 +37,7 @@ public class Propriedade {
 	private TipoPropriedade tipoPropriedade;
 	
 	public Propriedade() {
-		super();
+		
 	}
 
 	public Long getId() {

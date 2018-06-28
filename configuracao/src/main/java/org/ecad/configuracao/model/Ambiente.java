@@ -23,6 +23,16 @@ public class Ambiente {
 	
 	private String descricao;
 
+	public Ambiente() {
+		
+	}
+
+	public Ambiente(String nome, String descricao) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public Long getId() {
 		return id;
 	}

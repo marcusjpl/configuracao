@@ -1,23 +1,48 @@
-app.controller("ambienteController", function($scope, $http, growl) {
+app.controller("ambienteController", function($scope, $http, growl, URL) {
 	
-    $scope.sistema= {};
+	var config = {
+            headers : {
+            	'Content-Type': 'application/json'
+          }
+    }
+	
+	$scope.init = function () {
+		$scope.ambiente = {};
+	}
     
-    $scope.sistemas = [{nome:'SGA', descricao:'descricao sga'}, 
-    				   {nome:'SGI', descricao:'descricao sgi'}];
+    $http.get(URL + "/ambiente/ambientes")
+    .then(
+        function (response) {
+        	$scope.ambientes = response.data;
+        },
+        function (errResponse) {
+        	$scope.ambientes = response.statusText;
+        	growl.error("Erro ao carregar listagem", {});
+        }
+    );
     
     
     $scope.limpar = function() {
-    	$scope.sistema= {};
+    	$scope.ambiente= {};
     }
     
     $scope.salvar = function() {
-    	$scope.sistemas.push($scope.sistema);
-    	$scope.sistema= {};
-    	growl.success("Sistema cadastrado com sucesso", {});
+    	
+    	$http.post(URL + "/ambiente/salvar", $scope.ambiente, config)
+        .then(
+            function(response){
+            	growl.success("Ambiente salvo com sucesso", {});
+            	$scope.ambientes.push(response.data);
+            	$scope.ambiente= {};
+            }, 
+            function(response){
+            	growl.error("Erro ao salvar Ambiente", {});
+            }
+         );
     }
     
     $scope.remover = function(index) {
-    	$scope.sistemas.splice(index, 1);
+    	$scope.ambientes.splice(index, 1);
     }
     
     $scope.basicUsage = function (type) {

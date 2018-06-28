@@ -7,8 +7,8 @@
       <div class="col-lg-4">
 
         <div class="form-group">
-          <label>Nome</label> <input class="form-control" ng-model="sistema.nome"> <label>Descricao</label> <input
-            class="form-control" ng-model="sistema.descricao">
+          <label>Nome</label> <input class="form-control" ng-model="ambiente.nome"> <label>Descricao</label> <input
+            class="form-control" ng-model="ambiente.descricao">
         </div>
 
         <button type="submit" class="btn btn-default" ng-click="salvar()">Salvar</button>
@@ -35,7 +35,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="s in sistemas">
+                <tr ng-repeat="s in ambientes">
                   <td>{{ $index + 1 }}</td>
                   <td>{{ s.nome }}</td>
                   <td>{{ s.descricao }}</td>
