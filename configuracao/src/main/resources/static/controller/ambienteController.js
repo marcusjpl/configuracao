@@ -1,10 +1,6 @@
 app.controller("ambienteController", function($scope, $http, growl, URL) {
 	
-	var config = {
-        headers : {
-        	'Content-Type': 'application/json'
-        }
-    }
+	var config = { headers : {'Content-Type': 'application/json'}}
 	
 	$scope.init = function () {
 		$scope.ambiente = {};

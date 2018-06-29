@@ -1,6 +1,6 @@
 var app = angular.module("app", ['ngRoute', 'angular-growl']);
 
-app.constant('URL', 'http://localhost:7070');
+app.constant('URL', 'http://10.50.13.15:7070');
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -16,7 +16,7 @@ app.config(function($routeProvider) {
         controller: "ambienteController"
     })
     .otherwise({
-        template : "<h1>Pagina inicial</h1><p></p>"
+        template : "<h1>Pagina não existente</h1><p></p>"
     });
     
 });

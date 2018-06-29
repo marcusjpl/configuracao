@@ -1,5 +1,6 @@
 package org.ecad.configuracao.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,7 +37,14 @@ public class Sistema {
 	private String descricao;
 
 	public Sistema() {
+		super();
+	}
 
+	public Sistema(Ambiente ambiente, String nome, String descricao) {
+		super();
+		this.ambiente = ambiente;
+		this.nome = nome;
+		this.descricao = descricao;
 	}
 
 	public Long getId() {
