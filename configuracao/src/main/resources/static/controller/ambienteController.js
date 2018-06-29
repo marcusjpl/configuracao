@@ -35,7 +35,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     		valido = false;
     	}
     	if ($scope.ambiente.descricao == null) {
-    		growl.error("Campo ambiente obrigatorio", {});
+    		growl.error("Campo descricao obrigatorio", {});
     		valido = false;
     	}
     	
