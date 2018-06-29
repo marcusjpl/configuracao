@@ -1,6 +1,6 @@
 <div ng-controller="ambienteController">
 
-  <div class="col-lg-12">
+  <div class="col-lg-12" ng-init="init()">
     <h3 class="page-header">Adicionar ambiente</h3>
 
     <form role="form">
@@ -35,11 +35,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="s in ambientes">
+                <tr ng-repeat="a in ambientes">
                   <td>{{ $index + 1 }}</td>
-                  <td>{{ s.nome }}</td>
-                  <td>{{ s.descricao }}</td>
-                  <td><button type="reset" class="btn btn-default" ng-click="remover($index)">Remover</button></td>
+                  <td>{{ a.nome }}</td>
+                  <td>{{ a.descricao }}</td>
+                  <td><button type="reset" class="btn btn-default" ng-click="remover($index+1)">Remover</button></td>
                 </tr>
               </tbody>
             </table>

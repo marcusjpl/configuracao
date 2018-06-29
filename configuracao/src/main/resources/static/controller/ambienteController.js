@@ -8,41 +8,64 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 	
 	$scope.init = function () {
 		$scope.ambiente = {};
+		$scope.carregar();
 	}
-    
-    $http.get(URL + "/ambiente/ambientes")
-    .then(
-        function (response) {
-        	$scope.ambientes = response.data;
-        },
-        function (errResponse) {
-        	$scope.ambientes = response.statusText;
-        	growl.error("Erro ao carregar listagem", {});
-        }
-    );
-    
-    
+	
+	$scope.carregar = function() {
+		$http.get(URL + "/ambiente/ambientes")
+	    .then(
+	        function (response) {
+	        	$scope.ambientes = response.data;
+	        },
+	        function (errResponse) {
+	        	$scope.ambientes = response.statusText;
+	        	growl.error("Erro ao carregar listagem", {});
+	        }
+	    );
+    }
+	
     $scope.limpar = function() {
     	$scope.ambiente= {};
     }
     
     $scope.salvar = function() {
+    	var valido = true;
+    	if ($scope.ambiente.nome == null) {
+    		growl.error("Campo nome obrigatorio", {});
+    		valido = false;
+    	}
+    	if ($scope.ambiente.descricao == null) {
+    		growl.error("Campo ambiente obrigatorio", {});
+    		valido = false;
+    	}
     	
-    	$http.post(URL + "/ambiente/salvar", $scope.ambiente, config)
-        .then(
-            function(response){
-            	growl.success("Ambiente salvo com sucesso", {});
-            	$scope.ambientes.push(response.data);
-            	$scope.ambiente= {};
-            }, 
-            function(response){
-            	growl.error("Erro ao salvar Ambiente", {});
-            }
-         );
+    	if (valido) {
+    		$http.post(URL + "/ambiente/ambiente", $scope.ambiente, config)
+    		.then(
+    				function(response){
+    					growl.success("Ambiente salvo com sucesso", {});
+    					$scope.ambientes.push(response.data);
+    					$scope.ambiente= {};
+    				}, 
+    				function(response){
+    					growl.error("Erro ao salvar Ambiente", {});
+    				}
+    		);
+    	}
+    	
     }
     
-    $scope.remover = function(index) {
-    	$scope.ambientes.splice(index, 1);
+    $scope.remover = function(id) {
+    	$http.delete(URL+ "/ambiente/ambiente/" + id, config)
+    	.then(
+             function(response){
+              	growl.success("Ambiente removido com sucesso", {});
+              	$scope.carregar();
+             }, 
+             function(errResponse){
+               	growl.error("Erro ao remover Ambiente", {});
+             }
+        );
     }
     
     $scope.basicUsage = function (type) {

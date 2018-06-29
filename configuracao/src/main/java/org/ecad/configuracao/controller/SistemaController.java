@@ -3,14 +3,17 @@ package org.ecad.configuracao.controller;
 import java.util.List;
 
 import org.ecad.configuracao.model.Sistema;
-import org.ecad.configuracao.service.SistemaService;
+import org.ecad.configuracao.repository.SistemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,22 +21,48 @@ import org.springframework.web.bind.annotation.RestController;
 public class SistemaController {
 
 	@Autowired
-	private SistemaService sistemaService;
+	private SistemaRepository sistemaRepository;
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, 
-			consumes = {"application/json" }, produces = { "application/json" })
-	public ResponseEntity<Sistema> save(@RequestBody Sistema sistema) {
+	@GetMapping("sistema/{id}")
+	public ResponseEntity<Sistema> getById(@PathVariable("id") Long id) {
+		Sistema sistema = sistemaRepository.findById(id).get();
+		if (sistema == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Sistema>(sistema, HttpStatus.OK);
+	}
+	
+	@PutMapping("sistema")
+	public ResponseEntity<Sistema> atualizar(@RequestBody Sistema sistema) {
+		sistemaRepository.save(sistema);
+		return new ResponseEntity<Sistema>(sistema, HttpStatus.OK);
+	}
+
+	@PostMapping("sistema")
+	public ResponseEntity<Sistema> salvar(@RequestBody Sistema sistema) {
+		Sistema retorno = null;
 		try {
-			sistemaService.salvar(sistema);
+			retorno = sistemaRepository.save(sistema);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Sistema>(retorno, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/sistemas", method = RequestMethod.GET)
-	public @ResponseBody List<Sistema> buscarTodos() {
-		return sistemaService.buscar();
+	@DeleteMapping("/sistema/{id}")
+	public ResponseEntity<Sistema> remover(@PathVariable("id") Long id) {
+		Sistema Sistema = sistemaRepository.findById(id).get();
+		if (Sistema == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		sistemaRepository.deleteById(id);
+		return new ResponseEntity<Sistema>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping("sistemas")
+	public ResponseEntity<List<Sistema>> getAll() {
+		List<Sistema> result = (List<Sistema>) sistemaRepository.findAll();
+		return new ResponseEntity<List<Sistema>>(result, HttpStatus.OK);
 	}
 
 }

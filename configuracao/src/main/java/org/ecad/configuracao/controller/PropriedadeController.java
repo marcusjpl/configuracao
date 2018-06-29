@@ -3,15 +3,17 @@ package org.ecad.configuracao.controller;
 import java.util.List;
 
 import org.ecad.configuracao.model.Propriedade;
-import org.ecad.configuracao.model.Sistema;
-import org.ecad.configuracao.service.PropriedadeService;
+import org.ecad.configuracao.repository.PropriedadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,22 +21,48 @@ import org.springframework.web.bind.annotation.RestController;
 public class PropriedadeController {
 
 	@Autowired
-	private PropriedadeService propriedadeService;
+	private PropriedadeRepository propriedadeRepository;
+	
+	@GetMapping("propriedade/{id}")
+	public ResponseEntity<Propriedade> getById(@PathVariable("id") Long id) {
+		Propriedade propriedade = propriedadeRepository.findById(id).get();
+		if (propriedade == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Propriedade>(propriedade, HttpStatus.OK);
+	}
+	
+	@PutMapping("propriedade")
+	public ResponseEntity<Propriedade> atualizar(@RequestBody Propriedade propriedade) {
+		propriedadeRepository.save(propriedade);
+		return new ResponseEntity<Propriedade>(propriedade, HttpStatus.OK);
+	}
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, 
-			consumes = {"application/json" }, produces = { "application/json" })
-	public ResponseEntity<Sistema> save(@RequestBody Propriedade p) {
+	@PostMapping("propriedade")
+	public ResponseEntity<Propriedade> salvar(@RequestBody Propriedade propriedade) {
+		Propriedade retorno = null;
 		try {
-			propriedadeService.salvar(p);
+			retorno = propriedadeRepository.save(propriedade);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Propriedade>(retorno, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/propriedades", method = RequestMethod.GET)
-	public @ResponseBody List<Propriedade> buscar() {
-		return propriedadeService.buscar();
+	@DeleteMapping("/propriedade/{id}")
+	public ResponseEntity<Propriedade> remover(@PathVariable("id") Long id) {
+		Propriedade Propriedade = propriedadeRepository.findById(id).get();
+		if (Propriedade == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		propriedadeRepository.deleteById(id);
+		return new ResponseEntity<Propriedade>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping("propriedade")
+	public ResponseEntity<List<Propriedade>> getAll() {
+		List<Propriedade> result = (List<Propriedade>) propriedadeRepository.findAll();
+		return new ResponseEntity<List<Propriedade>>(result, HttpStatus.OK);
 	}
 
 }
