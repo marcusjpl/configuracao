@@ -11,6 +11,10 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 		$scope.carregar();
 	}
 	
+	$scope.limpar = function() {
+		$scope.ambiente= {};
+	}
+	
 	$scope.carregar = function() {
 		$http.get(URL + "/ambiente/ambientes")
 	    .then(
@@ -24,10 +28,6 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 	    );
     }
 	
-    $scope.limpar = function() {
-    	$scope.ambiente= {};
-    }
-    
     $scope.salvar = function() {
     	var valido = true;
     	if ($scope.ambiente.nome == null) {
@@ -42,21 +42,20 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     	if (valido) {
     		$http.post(URL + "/ambiente/ambiente", $scope.ambiente, config)
     		.then(
-    				function(response){
-    					growl.success("Ambiente salvo com sucesso", {});
-    					$scope.ambientes.push(response.data);
-    					$scope.ambiente= {};
-    				}, 
-    				function(response){
-    					growl.error("Erro ao salvar Ambiente", {});
-    				}
+    			function(response){
+    				growl.success("Ambiente salvo com sucesso", {});
+    				$scope.ambientes.push(response.data);
+    				$scope.ambiente= {};
+    			}, 
+    			function(response){
+    				growl.error("Erro ao salvar Ambiente", {});
+    			}
     		);
     	}
-    	
     }
     
     $scope.remover = function(id) {
-    	$http.delete(URL+ "/ambiente/ambiente/" + id, config)
+    	$http.delete(URL + "/ambiente/ambiente/" + id, config)
     	.then(
              function(response){
               	growl.success("Ambiente removido com sucesso", {});
@@ -84,6 +83,5 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
             growl.error("Ups, error message here!", config);
         }
       };
-    
     
 });
