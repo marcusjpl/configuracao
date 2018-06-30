@@ -23,9 +23,7 @@ public class Ambiente {
 	
 	private String descricao;
 
-	public Ambiente() {
-		super();
-	}
+	public Ambiente() {}
 	
 	public Ambiente(Long id, String nome, String descricao) {
 		super();

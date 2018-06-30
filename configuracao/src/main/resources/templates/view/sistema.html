@@ -40,6 +40,7 @@
                   <th></th>
                   <th>Nome</th>
                   <th>Descricao</th>
+                  <th>Ambiente</th>
                   <th></th>
                 </tr>
               </thead>
@@ -48,6 +49,7 @@
                   <td>{{ $index + 1 }}</td>
                   <td>{{ a.nome }}</td>
                   <td>{{ a.descricao }}</td>
+                  <td>{{ a.ambiente.nome }}</td>
                   <td>
                     <button type="reset" class="btn btn-default" ng-click="remover(a.id)">
                       <i class="fa fa-trash-o" ng-click="remover(a.id)" style="font-size: larger;"></i>
