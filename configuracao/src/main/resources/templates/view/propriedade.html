@@ -1,0 +1,28 @@
+<div ng-controller="propriedadeController">
+
+  <div class="col-lg-12" ng-init="init()">
+  
+    <h3 class="page-header">Propriedades</h3>
+
+    <form role="form">
+      <div class="col-lg-4">
+
+        <div class="form-group">
+          <label>Sistema</label>
+          <select class="form-control" id="repeatSelect" ng-model="sistema">
+            <option ng-repeat="sistema in sistemas" value="{{sistema}}">{{sistema.nome}}</option>
+          </select>
+          
+          <label>Ambiente</label>
+          <select class="form-control" id="repeatSelect" ng-model="ambiente">
+            <option ng-repeat="ambiente in ambientes" value="{{ambiente}}">{{ambiente.nome}}</option>
+          </select>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
