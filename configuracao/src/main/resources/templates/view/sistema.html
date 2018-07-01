@@ -44,9 +44,14 @@
                   <td>{{ a.nome }}</td>
                   <td>{{ a.descricao }}</td>
                   <td>
-                    <button type="reset" class="btn btn-primary" ng-click="remover(a.id)">
-                      <i class="fa fa-trash-o" ng-click="remover(a.id)" style="font-size: larger;"></i>
-                    </button>
+                  	<div style="text-align: center;">
+	                    	<button type="reset" class="btn btn-primary" ng-click="remover(a.id)">
+	                      <i class="fa fa-trash-o" style="font-size: larger;"></i>
+	                    	</button>
+	                    	<button type="reset" class="btn btn-primary" ng-click="editar(a)">
+	                      <i class="fa fa-edit" style="font-size: larger;"></i>
+	                    	</button>
+                    	</div>
                   </td>
                 </tr>
               </tbody>

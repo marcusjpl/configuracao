@@ -84,6 +84,10 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
         );
     }
     
+    $scope.editar = function(entity) {
+		$scope.ambiente = entity;
+    }
+    
     $scope.basicUsage = function (type) {
         var config = {};
         switch (type) {

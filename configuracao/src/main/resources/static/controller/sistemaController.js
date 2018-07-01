@@ -41,7 +41,8 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
 	    		.then(
 	    			function(response){
 	    				growl.success("Sistema salvo com sucesso", {});
-	    				$scope.sistemas.push(response.data);
+	    				$scope.carregar();
+	    				//$scope.sistemas.push(response.data);
 	    				$scope.sistema = {};
 	    			}, 
 	    			function(response){
@@ -62,6 +63,10 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
                	growl.error("Erro ao remover Sistema", {});
              }
         );
+    }
+    
+    $scope.editar = function(entity) {
+    		$scope.sistema = entity;
     }
     
 });

@@ -8,8 +8,8 @@
       <div class="col-lg-4">
 
         <div class="form-group">
-          <label>Nome</label> <input class="form-control" ng-model="ambiente.nome"> <label>Descricao</label> <input
-            class="form-control" ng-model="ambiente.descricao">
+          <label>Nome</label> <input class="form-control" ng-model="ambiente.nome"> 
+          <label>Descricao</label> <input class="form-control" ng-model="ambiente.descricao">
             
           <label>Sistema</label>
           <select class="form-control" id="repeatSelect" ng-model="ambiente.sistema">
@@ -47,9 +47,14 @@
                   <td>{{ a.descricao }}</td>
                   <td>{{ a.sistema.nome }}</td>
                   <td>
-                  <button type="reset" class="btn btn-primary" ng-click="remover(a.id)">
-                    <i class="fa fa-trash-o"  ng-click="remover(a.id)" style="font-size: larger;"></i>
-                  </button>
+                  <div style="text-align: center;">
+	                  <button type="reset" class="btn btn-primary" ng-click="remover(a.id)">
+	                    <i class="fa fa-trash-o"  ng-click="remover(a.id)" style="font-size: larger;"></i>
+	                  </button>
+	                  <button type="reset" class="btn btn-primary" ng-click="editar(a)">
+	                      <i class="fa fa-edit" style="font-size: larger;"></i>
+	                  </button>
+                  </div>
                   </td>
                 </tr>
               </tbody>
