@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,12 +22,8 @@ public class Sistema {
 	@ApiModelProperty(hidden = true)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sistema")
-	private List<Propriedade> propriedades;
-
-	@OneToOne
-	@NotNull(message = "Sistema deve possuir ao menos um Ambiente")
-	private Ambiente ambiente;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Ambiente> ambientes;
 
 	@NotNull(message = "Campo nome é obrigatório")
 	private String nome;
@@ -36,6 +31,11 @@ public class Sistema {
 	private String descricao;
 
 	public Sistema() {}
+
+	public Sistema(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 
 	public Long getId() {
 		return id;
@@ -61,20 +61,12 @@ public class Sistema {
 		this.descricao = descricao;
 	}
 
-	public List<Propriedade> getPropriedades() {
-		return propriedades;
+	public List<Ambiente> getAmbiente() {
+		return ambientes;
 	}
 
-	public void setPropriedades(List<Propriedade> propriedades) {
-		this.propriedades = propriedades;
-	}
-
-	public Ambiente getAmbiente() {
-		return ambiente;
-	}
-
-	public void setAmbiente(Ambiente ambiente) {
-		this.ambiente = ambiente;
+	public void setAmbiente(List<Ambiente> ambientes) {
+		this.ambientes = ambientes;
 	}
 
 	@Override

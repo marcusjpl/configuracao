@@ -24,8 +24,8 @@ public class Propriedade {
 	private Long id;
 
 	@ManyToOne
-	@NotNull(message="Propriedade deve ser de um Sistema")
-	private Sistema sistema;
+	@NotNull(message="Propriedade deve ser de um ambiente")
+	private Ambiente ambiente;
 	
 	@NotNull(message="Valor não pode ser nulo")
 	private String nome, valor;
@@ -72,12 +72,12 @@ public class Propriedade {
 		this.descricao = descricao;
 	}
 
-	public Sistema getSistema() {
-		return sistema;
+	public Ambiente getAmbiente() {
+		return ambiente;
 	}
 
-	public void setSistema(Sistema sistema) {
-		this.sistema = sistema;
+	public void setSistema(Ambiente ambiente) {
+		this.ambiente = ambiente;
 	}
 
 	public TipoPropriedade getTipoPropriedade() {
@@ -90,7 +90,7 @@ public class Propriedade {
 
 	@Override
 	public String toString() {
-		return "Propriedade [sistema=" + sistema + ", nome=" + nome + ", valor=" + valor + ", tipoPropriedade="
+		return "Propriedade [ambiente=" + ambiente + ", nome=" + nome + ", valor=" + valor + ", tipoPropriedade="
 				+ tipoPropriedade + "]";
 	}
 	

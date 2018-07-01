@@ -6,25 +6,11 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
 		$scope.ambientes = {};
 		$scope.sistema = {};
 		$scope.carregar();
-		$scope.carregarAmbientes();
 	}
 	
 	$scope.limpar = function() {
 		$scope.sistema= {};
 	}
-	
-	$scope.carregarAmbientes = function() {
-		$http.get(URL + "/ambiente/ambientes")
-	    .then(
-	        function (response) {
-	        	$scope.ambientes = response.data;
-	        },
-	        function (errResponse) {
-	        	$scope.ambientes = response.statusText;
-	        	growl.error("Erro ao carregar ambientes", {});
-	        }
-	    );
-    }
 	
 	$scope.carregar = function() {
 		$http.get(URL + "/sistema/sistemas")
@@ -49,14 +35,8 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
 	    		growl.error("Campo descricao obrigatorio", {});
 	    		valido = false;
 	    	}
-	    	if ($scope.sistema.ambiente == null) {
-	    		growl.error("Campo ambiente obrigatorio", {});
-	    		valido = false;
-	    	}
 	    	
 	    	if (valido) {
-	    		$scope.sistema.ambiente = angular.fromJson($scope.sistema.ambiente);
-	    		
 	    		$http.post(URL + "/sistema/sistema", $scope.sistema, config)
 	    		.then(
 	    			function(response){

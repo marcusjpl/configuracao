@@ -10,6 +10,11 @@
         <div class="form-group">
           <label>Nome</label> <input class="form-control" ng-model="ambiente.nome"> <label>Descricao</label> <input
             class="form-control" ng-model="ambiente.descricao">
+            
+          <label>Sistema</label>
+          <select class="form-control" id="repeatSelect" ng-model="ambiente.sistema">
+            <option ng-repeat="sistema in sistemas" value="{{sistema}}">{{sistema.nome}}</option>
+          </select>
         </div>
 
         <button type="submit" class="btn btn-default" ng-click="salvar()">Salvar</button>
@@ -31,6 +36,7 @@
                   <th></th>
                   <th>Nome</th>
                   <th>Descricao</th>
+                  <th>Sistema</th>
                   <th></th>
                 </tr>
               </thead>
@@ -39,6 +45,7 @@
                   <td>{{ $index + 1 }}</td>
                   <td>{{ a.nome }}</td>
                   <td>{{ a.descricao }}</td>
+                  <td>{{ a.sistema.nome }}</td>
                   <td>
                   <button type="reset" class="btn btn-default" ng-click="remover(a.id)">
                     <i class="fa fa-trash-o"  ng-click="remover(a.id)" style="font-size: larger;"></i>
