@@ -1,6 +1,8 @@
 package org.ecad.configuracao;
 
+import org.ecad.configuracao.model.Ambiente;
 import org.ecad.configuracao.model.Sistema;
+import org.ecad.configuracao.repository.AmbienteRepository;
 import org.ecad.configuracao.repository.SistemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -10,18 +12,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-	private SistemaRepository sistemaRepository;
-
 	@Autowired
-	public DataLoader(SistemaRepository sistemaRepository) {
-		this.sistemaRepository = sistemaRepository;
-	}
+	private SistemaRepository sistemaRepository;
+	
+	@Autowired
+	private AmbienteRepository ambienteRepository;
 
 	@Override
 	public void run(ApplicationArguments args) {
-		sistemaRepository.save(new Sistema("SGA", "sga"));
-		sistemaRepository.save(new Sistema("SGI", "sgi"));
-		sistemaRepository.save(new Sistema("Captacao", "captacao"));
+		Sistema sga = sistemaRepository.save(new Sistema("SGA", "sga"));
+		Sistema sgi = sistemaRepository.save(new Sistema("SGI", "sgi"));
+		Sistema cap= sistemaRepository.save(new Sistema("Captacao", "captacao"));
+		
+		Ambiente des = ambienteRepository.save(new Ambiente("Desenv", "desenvolvimento", sga));
+		Ambiente hom = ambienteRepository.save(new Ambiente("Homol", "homologacao", sga));
+		Ambiente pro = ambienteRepository.save(new Ambiente("Prod", "producao", sga));
+		
 	}
 
 }

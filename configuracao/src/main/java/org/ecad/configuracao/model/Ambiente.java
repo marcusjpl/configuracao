@@ -49,6 +49,12 @@ public class Ambiente {
 		this.descricao = descricao;
 	}
 
+	public Ambiente(String nome, String descricao, Sistema sistema) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.sistema = sistema;
+	}
+
 	public Long getId() {
 		return id;
 	}
