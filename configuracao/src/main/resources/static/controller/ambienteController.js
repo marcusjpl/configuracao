@@ -30,45 +30,46 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 		$http.get(URL + "/sistema/sistemas")
 	    .then(
 	        function (response) {
-	        		$scope.sistemas = response.data;
+	        	$scope.sistemas = response.data;
 	        },
 	        function (errResponse) {
-		        	$scope.sistemas = response.statusText;
-		        	growl.error("Erro ao carregar sistemas", {});
+		        $scope.sistemas = response.statusText;
+		        growl.error("Erro ao carregar sistemas", {});
 	        }
 	    );
     }
 	
     $scope.salvar = function() {
-	    	var valido = true;
-	    	if ($scope.ambiente.nome == null) {
-	    		growl.error("Campo nome obrigatorio", {});
-	    		valido = false;
-	    	}
-	    	if ($scope.ambiente.descricao == null) {
-	    		growl.error("Campo descricao obrigatorio", {});
-	    		valido = false;
-	    	}
-	    	if ($scope.ambiente.sistema == null) {
-	    		growl.error("Campo sistema obrigatorio", {});
-	    		valido = false;
-	    	}
+    	var valido = true;
+	    if ($scope.ambiente.nome == null) {
+	    	growl.error("Campo nome obrigatorio", {});
+	    	valido = false;
+	    }
+	    if ($scope.ambiente.descricao == null) {
+	    	growl.error("Campo descricao obrigatorio", {});
+	    	valido = false;
+	    }
+	    if ($scope.ambiente.sistema == null) {
+	    	growl.error("Campo sistema obrigatorio", {});
+	    	valido = false;
+	    }
+	    
+	    if (valido) {
+	    	$scope.ambiente.sistema = angular.fromJson($scope.ambiente.sistema);
 	    	
-	    	if (valido) {
-	    		$scope.ambiente.sistema = angular.fromJson($scope.ambiente.sistema);
-	    		
-	    		$http.post(URL + "/ambiente/ambiente", $scope.ambiente, config)
-	    		.then(
-	    			function(response){
-	    				growl.success("Ambiente salvo com sucesso", {});
-	    				$scope.ambientes.push(response.data);
-	    				$scope.ambiente= {};
-	    			}, 
-	    			function(response){
-	    				growl.error("Erro ao salvar Ambiente", {});
-	    			}
-	    		);
-	    	}
+	    	$http.post(URL + "/ambiente/ambiente", $scope.ambiente, config)
+	    	.then(
+	    		function(response){
+	    			growl.success("Ambiente salvo com sucesso", {});
+	    			//$scope.ambientes.push(response.data);
+	    			$scope.carregar();
+	    			$scope.ambiente= {};
+	    		}, 
+	    		function(response){
+	    			growl.error("Erro ao salvar Ambiente", {});
+	    		}
+	    	);
+	    }
     }
     
     $scope.remover = function(id) {
@@ -85,7 +86,15 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     }
     
     $scope.editar = function(entity) {
-		$scope.ambiente = entity;
+    	$http.get(URL + "/ambiente/ambiente/" + entity.id, config)
+    	.then(
+             function(response){
+            	 $scope.ambiente = response.data;
+             }, 
+             function(errResponse){
+               	growl.error("Erro ao buscar por Ambiente", {});
+             }
+        );
     }
     
     $scope.basicUsage = function (type) {
