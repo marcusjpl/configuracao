@@ -3,7 +3,7 @@ package org.ecad.configuracao.controller;
 import java.util.List;
 
 import org.ecad.configuracao.model.Sistema;
-import org.ecad.configuracao.repository.SistemaRepository;
+import org.ecad.configuracao.service.SistemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SistemaController {
 
 	@Autowired
-	private SistemaRepository sistemaRepository;
+	private SistemaService sistemaService;
 
 	@GetMapping("sistema/{id}")
 	public ResponseEntity<Sistema> getById(@PathVariable("id") Long id) {
-		Sistema sistema = sistemaRepository.findById(id).get();
+		Sistema sistema = sistemaService.findById(id);
 		if (sistema == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -34,7 +34,7 @@ public class SistemaController {
 	
 	@PutMapping("sistema")
 	public ResponseEntity<Sistema> atualizar(@RequestBody Sistema sistema) {
-		sistemaRepository.save(sistema);
+		sistemaService.save(sistema);
 		return new ResponseEntity<Sistema>(sistema, HttpStatus.OK);
 	}
 
@@ -42,7 +42,7 @@ public class SistemaController {
 	public ResponseEntity<Sistema> salvar(@RequestBody Sistema sistema) {
 		Sistema retorno = null;
 		try {
-			retorno = sistemaRepository.save(sistema);
+			retorno = sistemaService.save(sistema);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -51,17 +51,17 @@ public class SistemaController {
 
 	@DeleteMapping("/sistema/{id}")
 	public ResponseEntity<Sistema> remover(@PathVariable("id") Long id) {
-		Sistema Sistema = sistemaRepository.findById(id).get();
+		Sistema Sistema = sistemaService.findById(id);
 		if (Sistema == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		sistemaRepository.deleteById(id);
+		sistemaService.deleteById(id);
 		return new ResponseEntity<Sistema>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("sistemas")
 	public ResponseEntity<List<Sistema>> getAll() {
-		List<Sistema> result = (List<Sistema>) sistemaRepository.findAll();
+		List<Sistema> result = (List<Sistema>) sistemaService.findAll();
 		return new ResponseEntity<List<Sistema>>(result, HttpStatus.OK);
 	}
 

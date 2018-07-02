@@ -30,7 +30,8 @@ public class Sistema {
 
 	private String descricao;
 
-	public Sistema() {}
+	public Sistema() {
+	}
 
 	public Sistema(String nome, String descricao) {
 		this.nome = nome;
