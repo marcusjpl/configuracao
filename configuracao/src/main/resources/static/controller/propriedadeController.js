@@ -4,26 +4,21 @@ app.controller("propriedadeController", function($scope, $http, growl, URL) {
 	
 	$scope.init = function () {
 		$scope.ambiente = {};
-		$scope.sistema = {};
+		$scope.ambientes = {};
 		
-		$scope.ambientes = [];
+		$scope.sistema = {};
 		$scope.sistemas = [];
 		
-		$scope.carregarAmbientes();
 		$scope.carregarSistemas();
 	}
 	
-	$scope.limpar = function() {
-		$scope.ambiente= {};
-	}
-	
-	$scope.carregarAmbientes = function() {
-		$http.get(URL + "/ambiente/ambientes")
+	$scope.carregarPorIdSistema = function(id) {
+		$http.get(URL + "/api/ambientes/sistema/"+id, config)
 	    .then(
 	        function (response) {
 	        	$scope.ambientes = response.data;
 	        },
-	        function (errResponse) {
+	        function (response) {
 	        	$scope.ambientes = response.statusText;
 	        	growl.error("Erro ao carregar ambientes", {});
 	        }
@@ -31,7 +26,7 @@ app.controller("propriedadeController", function($scope, $http, growl, URL) {
     }
 	
 	$scope.carregarSistemas = function() {
-		$http.get(URL + "/sistema/sistemas")
+		$http.get(URL + "/api/sistemas")
 	    .then(
 	        function (response) {
 	        	$scope.sistemas = response.data;

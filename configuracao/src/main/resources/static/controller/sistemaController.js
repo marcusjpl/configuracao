@@ -13,7 +13,7 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
 	}
 	
 	$scope.carregar = function() {
-		$http.get(URL + "/sistema/sistemas")
+		$http.get(URL + "/api/sistemas")
 	    .then(
 	        function (response) {
 	        		$scope.sistemas = response.data;
@@ -37,7 +37,7 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
 	    	}
 	    	
 	    	if (valido) {
-	    		$http.post(URL + "/sistema/sistema", $scope.sistema, config)
+	    		$http.post(URL + "/api/sistema", $scope.sistema, config)
 	    		.then(
 	    			function(response){
 	    				growl.success("Sistema salvo com sucesso", {});
@@ -53,7 +53,7 @@ app.controller("sistemaController", function($scope, $http, growl, URL) {
     }
     
     $scope.remover = function(id) {
-    	$http.delete(URL + "/sistema/sistema/" + id, config)
+    	$http.delete(URL + "/api/sistema/" + id, config)
     	.then(
     			function(response){
               	growl.success("Sistema removido com sucesso", {});

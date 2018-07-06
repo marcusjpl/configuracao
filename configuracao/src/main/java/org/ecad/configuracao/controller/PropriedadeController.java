@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/propriedade")
+@RequestMapping("/api")
 public class PropriedadeController {
 
 	@Autowired

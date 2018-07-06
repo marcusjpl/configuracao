@@ -14,7 +14,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 	}
 	
 	$scope.carregar = function() {
-		$http.get(URL + "/ambiente/ambientes")
+		$http.get(URL + "/api/ambientes")
 	    .then(
 	        function (response) {
 	        	$scope.ambientes = response.data;
@@ -27,7 +27,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     }
 	
 	$scope.carregarSistemas = function() {
-		$http.get(URL + "/sistema/sistemas")
+		$http.get(URL + "/api/sistemas")
 	    .then(
 	        function (response) {
 	        	$scope.sistemas = response.data;
@@ -57,7 +57,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
 	    if (valido) {
 	    	$scope.ambiente.sistema = angular.fromJson($scope.ambiente.sistema);
 	    	
-	    	$http.post(URL + "/ambiente/ambiente", $scope.ambiente, config)
+	    	$http.post(URL + "/api/ambiente", $scope.ambiente, config)
 	    	.then(
 	    		function(response){
 	    			growl.success("Ambiente salvo com sucesso", {});
@@ -73,7 +73,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     }
     
     $scope.remover = function(id) {
-    	$http.delete(URL + "/ambiente/ambiente/" + id, config)
+    	$http.delete(URL + "/api/ambiente/" + id, config)
     	.then(
              function(response){
               	growl.success("Ambiente removido com sucesso", {});
@@ -86,7 +86,7 @@ app.controller("ambienteController", function($scope, $http, growl, URL) {
     }
     
     $scope.editar = function(entity) {
-    	$http.get(URL + "/ambiente/ambiente/" + entity.id, config)
+    	$http.get(URL + "/api/ambiente/" + entity.id, config)
     	.then(
              function(response){
             	 $scope.ambiente = response.data;

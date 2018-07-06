@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ambiente")
+@RequestMapping("/api")
 public class AmbienteController {
 
 	@Autowired
 	private AmbienteRepository ambienteRepository;
+	
 	
 	@GetMapping("ambiente/{id}")
 	public ResponseEntity<Ambiente> getById(@PathVariable("id") Long id) {
@@ -49,7 +50,7 @@ public class AmbienteController {
 		return new ResponseEntity<Ambiente>(retorno, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/ambiente/{id}")
+	@DeleteMapping("ambiente/{id}")
 	public ResponseEntity<Ambiente> remover(@PathVariable("id") Long id) {
 		Ambiente ambiente = ambienteRepository.findById(id).get();
 		if (ambiente == null) {
@@ -62,6 +63,12 @@ public class AmbienteController {
 	@GetMapping("ambientes")
 	public ResponseEntity<List<Ambiente>> getAll() {
 		List<Ambiente> result = (List<Ambiente>) ambienteRepository.findAll();
+		return new ResponseEntity<List<Ambiente>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("ambientes/sistema/{id}")
+	public ResponseEntity<List<Ambiente>> getBySistemaId(@PathVariable("id") Long id) {
+		List<Ambiente> result = (List<Ambiente>) ambienteRepository.findBySistemaId(id);
 		return new ResponseEntity<List<Ambiente>>(result, HttpStatus.OK);
 	}
 
