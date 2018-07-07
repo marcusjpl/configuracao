@@ -19,6 +19,10 @@ app.config(function($routeProvider) {
         templateUrl : "view/propriedade.html",
         controller: "propriedadeController"
     })
+    .when("/", {
+        templateUrl : "view/inicial.html",
+        controller: "inicialController"
+    })
     .otherwise({
         template : "<h1>Pagina não existente</h1><p></p>"
     });

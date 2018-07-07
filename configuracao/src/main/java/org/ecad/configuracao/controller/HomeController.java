@@ -33,9 +33,19 @@ public class HomeController {
 		return "view/propriedade.html";
 	}
 	
-	@RequestMapping("configuracao/welcome")
-	public String inicio(Map<String, Object> model) {
-		return "configuracao/welcome.html";
+	@RequestMapping("/view/inicial.html")
+	public String inicial(Map<String, Object> model) {
+		return "view/inicial.html";
+	}
+	
+	@RequestMapping("/menu_vertical.html")
+	public String menuVertical(Map<String, Object> model) {
+		return "includes/menu_vertical.html";
+	}
+	
+	@RequestMapping("/menu_horizontal.html")
+	public String menuHorizontal(Map<String, Object> model) {
+		return "includes/menu_horizontal.html";
 	}
 	
 	@RequestMapping("configuracao/forms.html")
