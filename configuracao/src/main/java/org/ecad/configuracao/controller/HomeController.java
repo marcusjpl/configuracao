@@ -18,7 +18,12 @@ public class HomeController {
     }
 	
 	@GetMapping("/configuracao")
-	public String welcome(Map<String, Object> model) {
+	public String home(Map<String, Object> model) {
+		return "home";
+	}
+	
+	@GetMapping("/configuracao/")
+	public String inicio(Map<String, Object> model) {
 		return "home";
 	}
 	
