@@ -5,7 +5,7 @@ app.constant('URL', 'http://localhost:7070');
 app.config(function($routeProvider) {
     $routeProvider
     .when("/configuracao", {
-        templateUrl : "configuracao.html"
+        templateUrl : "index.html"
     })
     .when("/sistema", {
         templateUrl : "view/sistema.html",
