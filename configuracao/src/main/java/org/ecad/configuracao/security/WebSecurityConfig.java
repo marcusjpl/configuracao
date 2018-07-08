@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
              .logout().logoutSuccessUrl("/configuracao/login")
                   .permitAll()
                   .and()
+                  
              .rememberMe();
     }
 
@@ -41,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
              .inMemoryAuthentication()
              .withUser("marcus").password("$2a$10$RkTVD0vVnTO9PcU2VbSOButxB3bavOmic/.cuhp4.0a9uml5Vg.bm").roles("EDITOR", "ADMIN")
              .and()
-             .withUser("admin").password("$2a$10$RkTVD0vVnTO9PcU2VbSOButxB3bavOmic/.cuhp4.0a9uml5Vg.bm").roles("EDITOR");
+             .withUser("admin").password("$2a$10$Ea9L4OmqxVsfJ2vIfdkixeLIov4ObrUTQweks1jR6bT6P4kzRh2r6").roles("EDITOR", "ADMIN");
     }
 
     @Bean
