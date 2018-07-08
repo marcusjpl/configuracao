@@ -42,14 +42,14 @@ public class HomeController {
 		return "view/inicial.html";
 	}
 	
-	@GetMapping("/menu_vertical.html")
+	@GetMapping("/menu.html")
 	public String menuVertical(Map<String, Object> model) {
-		return "includes/menu_vertical.html";
+		return "includes/menu.html";
 	}
 	
-	@GetMapping("/menu_horizontal.html")
+	@GetMapping("/header.html")
 	public String menuHorizontal(Map<String, Object> model) {
-		return "includes/menu_horizontal.html";
+		return "includes/header.html";
 	}
 
 	@GetMapping	("/swagger")
