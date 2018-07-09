@@ -9,11 +9,26 @@ app.controller("propriedadeController", function($scope, $http, growl, URL) {
 		$scope.sistema = {};
 		$scope.sistemas = [];
 		
+		$scope.propriedades = [];
+		
 		$scope.carregarSistemas();
 	}
 	
-	$scope.carregarPorIdSistema = function(id) {
-		$http.get(URL + "/api/ambientes/sistema/"+id, config)
+	$scope.carregarPropriedadesPorIdAmbiente = function(id) {
+		$http.get(URL + "/api/propriedade/ambiente/"+id, config)
+	    .then(
+	        function (response) {
+	        	$scope.propriedades = response.data;
+	        },
+	        function (response) {
+	        	$scope.propriedades = response.statusText;
+	        	growl.error("Erro ao carregar propriedades", {});
+	        }
+	    );
+    }
+	
+	$scope.carregarAmbientesPorIdSistema = function(id) {
+		$http.get(URL + "/api/ambiente/sistema/"+id, config)
 	    .then(
 	        function (response) {
 	        	$scope.ambientes = response.data;
@@ -37,5 +52,9 @@ app.controller("propriedadeController", function($scope, $http, growl, URL) {
 	        }
 	    );
     }
+	
+	$scope.addPropriedade = function() {
+		$scope.propriedades.push({nome:"",valor:"",descricao:""});
+	}
     
 });

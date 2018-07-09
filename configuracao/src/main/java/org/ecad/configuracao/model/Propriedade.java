@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 
 import org.ecad.configuracao.TipoPropriedade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -25,6 +27,7 @@ public class Propriedade {
 
 	@ManyToOne
 	@NotNull(message="Propriedade deve ser de um ambiente")
+	@JsonIgnore
 	private Ambiente ambiente;
 	
 	@NotNull(message="Valor não pode ser nulo")
@@ -76,7 +79,7 @@ public class Propriedade {
 		return ambiente;
 	}
 
-	public void setSistema(Ambiente ambiente) {
+	public void setAmbiente(Ambiente ambiente) {
 		this.ambiente = ambiente;
 	}
 

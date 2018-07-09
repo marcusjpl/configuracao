@@ -66,7 +66,7 @@ public class AmbienteController {
 		return new ResponseEntity<List<Ambiente>>(result, HttpStatus.OK);
 	}
 	
-	@GetMapping("ambientes/sistema/{id}")
+	@GetMapping("ambiente/sistema/{id}")
 	public ResponseEntity<List<Ambiente>> getBySistemaId(@PathVariable("id") Long id) {
 		List<Ambiente> result = (List<Ambiente>) ambienteRepository.findBySistemaId(id);
 		return new ResponseEntity<List<Ambiente>>(result, HttpStatus.OK);

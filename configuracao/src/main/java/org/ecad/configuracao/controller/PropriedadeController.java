@@ -64,5 +64,11 @@ public class PropriedadeController {
 		List<Propriedade> result = (List<Propriedade>) propriedadeRepository.findAll();
 		return new ResponseEntity<List<Propriedade>>(result, HttpStatus.OK);
 	}
+	
+	@GetMapping("propriedade/ambiente/{id}")
+	public ResponseEntity<List<Propriedade>> getByAmbienteId(@PathVariable("id") Long id) {
+		List<Propriedade> result = (List<Propriedade>) propriedadeRepository.findByAmbienteId(id);
+		return new ResponseEntity<List<Propriedade>>(result, HttpStatus.OK);
+	}
 
 }

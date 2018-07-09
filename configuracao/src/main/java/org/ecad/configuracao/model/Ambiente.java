@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Ambiente {
 	@ApiModelProperty(hidden = true)
 	private Long id;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ambiente")
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ambiente")
 	private List<Propriedade> propriedades;
 	
 	@ManyToOne
