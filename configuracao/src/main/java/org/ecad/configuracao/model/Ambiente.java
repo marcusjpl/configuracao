@@ -86,14 +86,15 @@ public class Ambiente {
 	public void setPropriedades(List<Propriedade> propriedades) {
 		this.propriedades = propriedades;
 	}
-
+	
 	public Sistema getSistema() {
 		return sistema;
 	}
 
-	public void setSitema(Sistema sitema) {
-		this.sistema = sitema;
+	public void setSistema(Sistema sistema) {
+		this.sistema = sistema;
 	}
+
 
 	@Override
 	public String toString() {

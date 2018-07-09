@@ -22,11 +22,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/configuracao/")
-	public String inicio(Map<String, Object> model) {
-		return "home";
-	}
-	
 	@GetMapping("/view/sistema.html")
 	public String sistema(Map<String, Object> model) {
 		return "view/sistema.html";
