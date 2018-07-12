@@ -54,7 +54,19 @@ app.controller("propriedadeController", function($scope, $http, growl, URL) {
     }
 	
 	$scope.addPropriedade = function() {
-		$scope.propriedades.push({nome:"",valor:"",descricao:""});
+		if (angular.isUndefined($scope.sistema) || angular.isUndefined($scope.ambiente) 
+				|| $scope.sistema.id == null || $scope.ambiente.id == null) {
+			growl.warning("Escolha um Sistema e um Ambiente", {});
+		} else {
+			$scope.propriedades.push({nome:"",valor:"",descricao:""});
+		}
+	}
+	
+	$scope.limpar = function() {
+		$scope.ambiente = {};
+		$scope.ambientes = {};
+		$scope.sistema = {};
+		$scope.propriedades = [];
 	}
     
 });
