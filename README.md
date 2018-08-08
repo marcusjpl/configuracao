@@ -1,5 +1,6 @@
 # configuracao
-SpringBoot + Rest + AngularJS + H2 + Swagger
+SpringBoot + AngularJS + H2 + Swagger /
+App para configurar ambientes e suas propriedades
 
 ## porta 7070
 ## url para swager
